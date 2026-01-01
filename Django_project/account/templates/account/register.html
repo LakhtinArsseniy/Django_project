@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.username.label }}
+        {{ form.username }}
+        {% if form.username.errors %}
+            {% for error in form.username.errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+        <br>
+
+        {{ form.email.label }}
+        {{ form.email }}
+        {% if form.email.errors %}
+            {% for error in form.email.errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+        <br>
+    
+        {{ form.password1.label }}
+        {{ form.password1 }}
+        {% if form.password1.errors %}
+            {% for error in form.password1.errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+        <br>
+    
+        {{ form.password2.label }}
+        {{ form.password2 }}
+        {% if form.password2.errors %}
+            {% for error in form.password2.errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+        <br>
+
+        <input type="submit">
+    </form>
+    <p>Already have an account? <a href="{% url 'login' %}">Log In</a></p>
+{% endblock %}
