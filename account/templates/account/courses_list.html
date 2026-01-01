@@ -1,0 +1,15 @@
+<h2>Список курсів</h2>
+
+<ul>
+    {% for course in courses %}
+        <li>
+            <strong>{{ course.name }}</strong> - {{ course.description }}<br>
+            Дата: {{ course.start_date }} - {{ course.end_date }}<br>
+            <a href="{% url 'enroll_course' course.id %}">Записатися на курс</a>
+        </li>
+    {% empty %}
+        <li>Поки немає</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'register_student' %}">Повернутися до реєстрації</a>
