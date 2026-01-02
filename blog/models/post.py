@@ -9,4 +9,5 @@ class Post(TimeStampedModelMixin):
 
     content = models.TextField()
     image = models.ImageField(upload_to="posts/")
-    
+
+
