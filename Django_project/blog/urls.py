@@ -4,4 +4,6 @@ from . import views
 
 urlpatterns = [
     path('posts/create/', views.create_post),
+    path('home/index/', views.home),
+
 ]

@@ -2,5 +2,8 @@
 
 {% block content %}
     {% for post in posts %}
+    <h1>{{ post.created_at }}</h1>
+    <h2>{{ post.user.username }}</h2>
+
     {% endfor %}
 {% endblock %}

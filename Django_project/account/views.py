@@ -3,7 +3,9 @@ from django.contrib.auth import login
 
 from account.forms import RegistrationForm, LoginForm
 from account.models import User
-
+from django.contrib import messages
+from .models import Course, Enrollment
+from django.contrib.auth.decorators import login_required
 
 def register(request):
     form = RegistrationForm()
@@ -27,3 +29,20 @@ def login_view(request):
             login(request, form.get_user())
             return redirect('index')
     return render(request, 'account/login.html', {'form': form})
+
+
+@login_required
+def enroll_course(request, course_id):
+    course = Course.objects.get(id=course_id)
+    student = request.user
+    if Enrollment.objects.filter(student=student, course=course).exists():
+        messages.warning(request, "Ви вже записані на цей курс.")
+    else:
+        Enrollment.objects.create(student=student, course=course)
+        messages.success(request, f"Ви успішно записані на курс: {course.name}")
+
+    return redirect('courses_list')
+
+def courses_list(request):
+    courses = Course.objects.all()
+    return render(request, 'account/courses_list.html', {'courses': courses})
