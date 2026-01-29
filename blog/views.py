@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from .forms import PostForm
-from .models import Post, Comment 
+from .models import Post
 
 
 def create_post(request):
@@ -14,10 +14,7 @@ def create_post(request):
 
 
 def home(request):
-    posts = Post.objects.all().prefetch_related('comments').select_related('user')# QuerySet [1, 2, 3, 4, ....]
-    # comments = Comment.objects.select_related('user', 'post').all()
-
-
+    posts = Post.objects.all()  # QuerySet [1, 2, 3, 4, ....]
     #  Post.objects.filter(user=request.user, content="Hello")
     #  Post.objects.get(content="Hello")  object, instance   <- Get must return 1 instance, returned multiple instead
     #  Post.objects.get(id=2)
